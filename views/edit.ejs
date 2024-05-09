@@ -1,0 +1,38 @@
+<%- include('header.ejs') %>
+<style>
+  .imgArea {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+  img {
+    width: calc(100% - 2rem);
+  }
+</style>
+<main class="mw">
+  <h2>THE BLOG</h2>
+  <h3>수정 페이지</h3>
+  <form action="/edit" method="post" class="writecon" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+    <label for="title">제목</label>
+    <input type="text" name="title" id="title" value="<%= posts.title %>" placeholder="제목을 입력해주세요" required >
+    <input type="text" id="id" name="id" value="<%= posts._id %>" hidden>
+    <label for="postImg">이미지첨부</label>
+    <input type="file" id="postImg" name="postImg">
+    <input type="text" id="postImgOld" name="postImgOld" value="<%= posts.postImgPath %>" hidden>
+    <div class="imgArea"><img src="<%= posts.postImgPath %>" alt="<%= posts.title %>"></div>
+    <label for="content">내용</label>
+    <textarea name="content" id="content" placeholder="내용을 입력해 주세요"></textarea>
+    <label for="createAtDate" hidden>작성일</label>
+    <input type="date" id="createAtDate" name="createAtDate" >
+    <button type="submit">글작성</button>
+  </form>
+</main>
+<script>
+  const today = new Date().toISOString().slice(0,10);
+  const inputDate = document.querySelector('#createAtDate');
+  const content = document.querySelector('#content');
+  content.value = "<%= posts.content %>";
+  inputDate.value = today;
+</script>
+<%- include('footer.ejs') %>
