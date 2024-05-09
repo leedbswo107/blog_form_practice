@@ -10,7 +10,7 @@ const path = require('path');
 const fs = require('fs');
 
 const uri = process.env.MONGO_URI;
-const port = process.env.PORT;
+const port = 3000;
 const SECRET = process.env.SECRET_KEY;
 
 const app = express();
